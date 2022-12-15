@@ -9,13 +9,14 @@ namespace Bibliotek
         {
             HandleTextFiles handleTextFiles = new HandleTextFiles();
             UserLogin login = new UserLogin();
-            handleTextFiles.AddLibrarian("Emma Dahlqvist");
-            handleTextFiles.AddMember("Ida Dahlqvist");
 
             //Steg 1:
             //1) Logga in
             //2) Skapa konto
-            login.Login();
+            login.LoginPhase();
+
+            //Steg 2:
+            //Meny
         }
     }
 }

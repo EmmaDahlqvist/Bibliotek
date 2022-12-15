@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Bibliotek.Users
 {
-    internal class Member : User
+    internal class Librarian : User
     {
-        public Member(string firstname, string lastname, string password, int number)
+        public Librarian(string firstname, string lastname, string password, int number)
         {
             this.firstname = firstname;
             this.lastname = lastname;

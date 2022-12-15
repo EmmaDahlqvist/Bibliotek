@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bibliotek.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
@@ -9,9 +10,9 @@ namespace Bibliotek.TextFiles
 {
     internal class HandleTextFiles
     {
-        public void AddLibrarian(string input)
+        public void AddLibrarian(User user)
         {
-            AddUser(input, "C:\\Users\\emma.dahlqvist4\\Desktop\\Bibliotek\\Bibliotek\\Bibliotek\\TextFiles\\Librarians.txt");
+            AddUser(user, "C:\\Users\\emma.dahlqvist4\\Desktop\\Bibliotek\\Bibliotek\\Bibliotek\\TextFiles\\Librarians.txt");
         }
 
         public List<String> GetLibrarians()
@@ -19,25 +20,58 @@ namespace Bibliotek.TextFiles
             return GetUser("C:\\Users\\emma.dahlqvist4\\Desktop\\Bibliotek\\Bibliotek\\Bibliotek\\TextFiles\\Librarians.txt");
         }
 
-        public void AddMember(string input)
+        public void AddMember(User user)
         {
-            AddUser(input, "C:\\Users\\emma.dahlqvist4\\Desktop\\Bibliotek\\Bibliotek\\Bibliotek\\TextFiles\\Members.txt");
+            AddUser(user, "C:\\Users\\emma.dahlqvist4\\Desktop\\Bibliotek\\Bibliotek\\Bibliotek\\TextFiles\\Members.txt");
         }
 
-        public List<String> GetMember(string input)
+        public List<String> GetMembers()
         {
             return GetUser("C:\\Users\\emma.dahlqvist4\\Desktop\\Bibliotek\\Bibliotek\\Bibliotek\\TextFiles\\Members.txt");
         }
-        
-        
-        
-        
-        private void AddUser(string input, string file)
+
+        public User GetUser(int authority, string password, int number)
+        {
+            List<string> userList = new List<string>();
+            if (authority == 1)
+            {
+                userList = GetLibrarians();
+            }
+            else if (authority == 2)
+            {
+                userList = GetMembers();
+            }
+
+            foreach (string user in userList)
+            {
+                string[] info = user.Split(" ");
+                if (info.Length == 4)
+                {
+                    if (info[2] == password)
+                    {
+                        if (info[3] == number.ToString())
+                        {
+                            if(authority == 1)
+                            {
+                                return new Librarian(info[0], info[1], info[2], int.Parse(info[3]));
+                            } else if (authority == 2){
+                                return new Member(info[0], info[1], info[2], int.Parse(info[3]));
+                            }
+                        }
+                    }
+                }
+            }
+
+            return null;
+
+        }
+
+        private void AddUser(User input, string file)
         {
             try
             {
                 StreamWriter sw = new StreamWriter(file, true);
-                sw.WriteLine(input);
+                sw.WriteLine(input.firstname + " " + input.lastname + " " + input.number + " " + input.password);
                 sw.Close();
             }
             catch (Exception e)
@@ -58,7 +92,6 @@ namespace Bibliotek.TextFiles
 
                 while ((ln = sr.ReadLine()) != null)
                 {
-                    Console.WriteLine(ln);
                     members.Add(ln);
                     counter++;
                 }

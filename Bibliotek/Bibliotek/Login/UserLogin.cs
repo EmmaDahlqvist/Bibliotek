@@ -1,45 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Bibliotek.Login;
+using Bibliotek.Other;
+using Bibliotek.Users;
 
 namespace Bibliotek.TextFiles.Login
 {
     internal class UserLogin
     {
-        public void Login()
+        Option1or2 option1or2 = new Option1or2();
+        LoginPhase login = new LoginPhase();
+        CreateAccountPhase createAccount = new CreateAccountPhase();
+        public void LoginPhase()
         {
             Console.WriteLine("Välkommen!");
             Console.WriteLine("1) Logga in\n2) Skapa konto");
-            int input;
-            do
-            {
-                try
-                {
-                    input = int.Parse(Console.ReadLine());
-                    if(input == 1 || input == 2)
-                    {
-                        break;
-                    } else
-                    {
-                        Console.WriteLine("Välj alternativ 1 eller 2!");
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Välj alternativ 1 eller 2!");
-                }
-
-            } while (true);
+            int input = option1or2.ChooseOption1Or2();
 
             if(input == 1)
             {
-                //login
+                Login();
+
             } else if(input == 2)
             {
-                //createAccount
+                CreateAccount();
             }
         }
+
+        private void Login()
+        {
+            if (login.Login() == null) //inloggningen gick inte igenom
+            {
+                CreateAccount();
+            } 
+        }
+
+        private void CreateAccount() {
+            if (createAccount.CreateAccount() == null)
+            {
+                Login();
+            }
+        }
+
     }
 }
