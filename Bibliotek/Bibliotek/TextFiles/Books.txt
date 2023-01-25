@@ -1,0 +1,6 @@
+Titel|F�rfattare|ISBN|Status|Personnummer
+bok|anna|123
+bok2|astdi|123
+Boken om hundar|Martin|123-123|A|0
+Boken om hundar|Martin|24|B|123
+Barnbok|Astrid|123|R|41223

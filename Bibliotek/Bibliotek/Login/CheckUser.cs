@@ -11,13 +11,15 @@ namespace Bibliotek.Login
 {
     internal class CheckUser
     {
-        HandleTextFiles handleTextFiles = new HandleTextFiles();
+        HandleUserFiles handleTextFiles = new HandleUserFiles();
 
+        //Kolla om lösenordet existerar
         public bool CheckPassword(string password, int authority)
         {
             return CheckUserInformation(2, password, authority);
         }
 
+        //kolla om personnumret existerar 
         public bool CheckNumber(int number, int authority)
         {
             return CheckUserInformation(2, number.ToString(), authority);
@@ -37,7 +39,7 @@ namespace Bibliotek.Login
 
             foreach (string user in userList)
             {
-                string[] info = user.Split(" ");
+                string[] info = user.Split("|");
                 if (info.Length == 4)
                 {
                     if (info[partIndex] == part)

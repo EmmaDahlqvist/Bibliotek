@@ -1,2 +1,7 @@
-Emma D 23 23
-EMma D 234 23
+
+Emma|Dahlqvist|1234|123
+124|Dahlqvist|41223|123
+Emma|D|412|041223
+Emma|D|412|abc
+Emma|D|123467|abcd
+123|123|123|cde
